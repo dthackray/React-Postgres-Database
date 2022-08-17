@@ -21,14 +21,10 @@ app.post("/adduser", (req, res) => {
     pool.query(insertStatement)
         .then((res) => {
             console.log("Data Saved")
-            console.log(res)
         })
         .catch((err) => {
-            console.log(err)
+            console.log("Error: Data Not Saved")
         })
-
-    console.log(req.body)
-    res.send("Response sent: " + req.body)
 })
 
 app.listen(port, () => console.log(`Server is listening on localhost:${port}`))
