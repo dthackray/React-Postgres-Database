@@ -11,12 +11,12 @@ app.use(cors())
 
 app.post("/adduser", (req, res) => {
     const username = req.body["username"]
-    const password = req.body["password"]
+    const age = req.body["age"]
 
     console.log("Username: " + username)
-    console.log("Password: " + password)
+    console.log("Age: " + age)
 
-    const insertStatement = `INSERT INTO accounts ( username, password ) VALUES ( '${username}', '${password}' );`
+    const insertStatement = `INSERT INTO entries ( username, age ) VALUES ( '${username}', '${age}' );`
 
     pool.query(insertStatement)
         .then((res) => {
