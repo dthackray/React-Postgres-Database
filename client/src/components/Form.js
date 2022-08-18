@@ -1,22 +1,32 @@
 import Label from "./Label"
 import Field from "./Field"
 import Button from "./Button"
-import React from 'react'
-
-const handleSubmit = e => {
-    e.preventDefault()
-    alert("You have submitted the form.")
-}
+import React, { useState } from 'react'
 
 const Form = () => {
-  return (
-    <form className="form" onSubmit={handleSubmit}>
-        <Label htmlFor="name" text="Enter your name: " />
-        <Field name="name" id="name" />
-        <Label htmlFor="age" text="Enter your age: " />
-        <Field name="age" id="age" />
-        <Button type="submit" value="Submit!" />
-    </form>
+    const handleSubmit = e => {
+        e.preventDefault()
+        setSubmitting(true)
+    
+        setTimeout(() => {
+            setSubmitting(false)
+            alert("You have submitted the form.")
+        }, 3000)
+    }
+
+    const [submitting, setSubmitting] = useState(false)
+
+    return (
+        <div>
+            {submitting && <div>Submitting Form...</div>}
+            <form className="form" onSubmit={handleSubmit}>
+                <Label htmlFor="name" text="Enter your name: " />
+                <Field name="name" id="name" />
+                <Label htmlFor="age" text="Enter your age: " />
+                <Field name="age" id="age" />
+                <Button type="submit" value="Submit!" />
+            </form>
+        </div>
   )
 }
 

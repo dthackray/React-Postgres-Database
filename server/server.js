@@ -10,13 +10,13 @@ app.use(express.json())
 app.use(cors())
 
 app.post("/adduser", (req, res) => {
-    const username = req.body["username"]
+    const name = req.body["name"]
     const age = req.body["age"]
 
-    console.log("Username: " + username)
+    console.log("Name: " + name)
     console.log("Age: " + age)
 
-    const insertStatement = `INSERT INTO entries ( username, age ) VALUES ( '${username}', '${age}' );`
+    const insertStatement = `INSERT INTO entries ( name, age ) VALUES ( '${name}', '${age}' );`
 
     pool.query(insertStatement)
         .then((res) => {
