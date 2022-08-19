@@ -1,9 +1,19 @@
 import Label from "./Label"
 import Field from "./Field"
 import Button from "./Button"
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
+
+const formReducer = (state, event) => {
+    return {
+        ...state,
+        [event.target.name]: event.target.value
+    }
+}
 
 const Form = () => {
+    const [formData, setFormData] = useReducer(formReducer, {})
+    const [submitting, setSubmitting] = useState(false)
+
     const handleSubmit = e => {
         e.preventDefault()
         setSubmitting(true)
@@ -13,8 +23,6 @@ const Form = () => {
             alert("You have submitted the form.")
         }, 3000)
     }
-
-    const [submitting, setSubmitting] = useState(false)
 
     return (
         <div>
