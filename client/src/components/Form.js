@@ -4,6 +4,12 @@ import Button from "./Button"
 import React, { useReducer, useState } from 'react'
 
 const formReducer = (state, event) => {
+    if (event.reset) {
+        return {
+            name: '',
+            age: ''
+        }
+    }
     return {
         ...state,
         [event.name]: event.value
@@ -21,6 +27,9 @@ const Form = () => {
         setTimeout(() => {
             setSubmitting(false)
             alert("You have submitted the form.")
+            setFormData({
+                reset: true
+            })
         }, 3000)
     }
 
@@ -44,9 +53,9 @@ const Form = () => {
                 </div>}
             <form className="form" onSubmit={handleSubmit}>
                 <Label htmlFor="name" text="Enter your name: " />
-                <Field name="name" id="name" onChange={handleChange} />
+                <Field name="name" id="name" onChange={handleChange} value={formData.name || ''} />
                 <Label htmlFor="age" text="Enter your age: " />
-                <Field name="age" id="age" onChange={handleChange} />
+                <Field name="age" id="age" onChange={handleChange} value={formData.age || ''} />
                 <Button type="submit" value="Submit!" />
             </form>
         </div>
