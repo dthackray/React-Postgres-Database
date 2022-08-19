@@ -11,7 +11,8 @@ const formReducer = (state, event) => {
 }
 
 const Form = () => {
-    const [formData, setFormData] = useReducer(formReducer, {})
+    const [nameData, setNameData] = useReducer(formReducer, {})
+    const [ageData, setAgeData] = useReducer(formReducer, {})
     const [submitting, setSubmitting] = useState(false)
 
     const handleSubmit = e => {
@@ -29,9 +30,9 @@ const Form = () => {
             {submitting && <div>Submitting Form...</div>}
             <form className="form" onSubmit={handleSubmit}>
                 <Label htmlFor="name" text="Enter your name: " />
-                <Field name="name" id="name" />
+                <Field name="name" id="name" onChange={setNameData} />
                 <Label htmlFor="age" text="Enter your age: " />
-                <Field name="age" id="age" />
+                <Field name="age" id="age" onChange={setAgeData} />
                 <Button type="submit" value="Submit!" />
             </form>
         </div>
