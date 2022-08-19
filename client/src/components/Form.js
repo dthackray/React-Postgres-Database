@@ -6,13 +6,12 @@ import React, { useReducer, useState } from 'react'
 const formReducer = (state, event) => {
     return {
         ...state,
-        [event.target.name]: event.target.value
+        [event.name]: event.value
     }
 }
 
 const Form = () => {
-    const [nameData, setNameData] = useReducer(formReducer, {})
-    const [ageData, setAgeData] = useReducer(formReducer, {})
+    const [formData, setFormData] = useReducer(formReducer, {})
     const [submitting, setSubmitting] = useState(false)
 
     const handleSubmit = e => {
@@ -25,14 +24,21 @@ const Form = () => {
         }, 3000)
     }
 
+    const handleChange = event => {
+        setFormData({
+            name: event.target.name,
+            value: event.target.value
+        })
+    }
+
     return (
         <div>
             {submitting && <div>Submitting Form...</div>}
             <form className="form" onSubmit={handleSubmit}>
                 <Label htmlFor="name" text="Enter your name: " />
-                <Field name="name" id="name" onChange={setNameData} />
+                <Field name="name" id="name" onChange={handleChange} />
                 <Label htmlFor="age" text="Enter your age: " />
-                <Field name="age" id="age" onChange={setAgeData} />
+                <Field name="age" id="age" onChange={handleChange} />
                 <Button type="submit" value="Submit!" />
             </form>
         </div>
