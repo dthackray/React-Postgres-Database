@@ -2,6 +2,7 @@ import Label from "./Label"
 import Field from "./Field"
 import Button from "./Button"
 import React, { useReducer, useState } from 'react'
+import addUser from "../../../server/server.js"
 
 const formReducer = (state, event) => {
     if (event.reset) {
@@ -23,15 +24,24 @@ const Form = () => {
     const handleSubmit = e => {
         e.preventDefault()
         setSubmitting(true)
-    
-        setTimeout(() => {
-            setSubmitting(false)
-            alert("You have submitted the form.")
-            setFormData({
-                reset: true
-            })
-        }, 3000)
-    }
+
+        addUser()
+
+        // fetch('http://localhost:4000/adduser', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({formData}),
+        //     })
+        //     .then(response => {
+        //         return response.text();
+        //     })
+        //     .then(data => {
+        //         alert(data);
+        //     });
+
+        }
 
     const handleChange = event => {
         setFormData({
@@ -60,6 +70,6 @@ const Form = () => {
             </form>
         </div>
   )
-}
+                        }
 
 export default Form
