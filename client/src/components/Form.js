@@ -33,7 +33,15 @@ const Form = () => {
 
     return (
         <div>
-            {submitting && <div>Submitting Form...</div>}
+            {submitting &&
+                <div>
+                    You are submitting:
+                    <ul>
+                        {Object.entries(formData).map(([name, value]) => (
+                            <li key={name}><strong>{name}</strong>:{value.toString()}</li>
+                        ))}
+                    </ul>
+                </div>}
             <form className="form" onSubmit={handleSubmit}>
                 <Label htmlFor="name" text="Enter your name: " />
                 <Field name="name" id="name" onChange={handleChange} />
